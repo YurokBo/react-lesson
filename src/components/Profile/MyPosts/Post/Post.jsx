@@ -7,10 +7,10 @@ const Post = (props) => {
         return (
 
                     <div className={s.item}>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz53sp_NDyDgocvpd3WIOzN1YRF3u2xly-4uxamK3iU04PpLuPpw&s" alt=""/>
-                        {props.message}
+                        <img src="https://sun1-24.userapi.com/c857320/v857320383/72cc9/Q2ZxjjbphDM.jpg?ava=1" alt=""/>
+                        {props.message} {props.name}
                         <div>
-                            <span>like</span>
+                            <span>like</span>{' ' + props.likeCount}
                         </div>
 
                     </div>

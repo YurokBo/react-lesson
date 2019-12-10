@@ -9,5 +9,6 @@
 }
 
 .item span {
-  color: white;
+  color: red;
+    font-weight: bold;
 }

@@ -4,7 +4,7 @@ import MyPosts from "./MyPosts/MyPosts";
 
 
 const Profile = () => {
-        return <div className={s.content}>
+        return <div>
                 <div>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFocVdrh7XQ-XWjzCDgkUvEflBfBts5IxFoH2JhpjsAFj-O_PC&s" alt=""/>
                 </div>
