@@ -9,7 +9,6 @@ import {BrowserRouter, Route} from "react-router-dom";*/
 import rerenderEntireTree from "./render";
 import state from "./redux/State";
 
-
 rerenderEntireTree(state);
 
 // If you want your app to work offline and load faster, you can change
