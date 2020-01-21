@@ -2,9 +2,9 @@
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY',
     SEND_MESSAGE = 'SEND-MESSAGE';
-//инициализируем state для dialogs
-//забираем dialogsPage из старого объекта store
+//инициализируем state для dialogs и передаем в параметры по умолчанию state = initialState
 let initialState = {
+    //забираем dialogsPage из старого объекта store
     dialogs: [
         {id: 1, name: 'Dimych'},
         {id: 2, name: 'Ivan'},

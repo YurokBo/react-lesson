@@ -5,7 +5,7 @@ import sidebarReducer from "./SidebarReducer";
 
 //function which reducers stick together
 let reducers = combineReducers({
-    //ветки из объекта store, за которые отвечают functions reducers
+    //ветки из объекта _state, за которые отвечают functions reducers
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer
