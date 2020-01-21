@@ -13,9 +13,7 @@ import Settings from "./components/Settings/Settings";
 
 
 const App = (props) => {
-
     return (
-
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
@@ -33,6 +31,6 @@ const App = (props) => {
             </div>
 
     );
-}
+};
 
 export default App;

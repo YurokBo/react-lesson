@@ -1,5 +1,12 @@
 // create reducer function for sidebar page
-const sidebarReducer = (state, action) => {
+
+//for comments look in ProfileReducer
+
+let initialState = {
+
+};
+
+const sidebarReducer = (state = initialState, action) => {
 
 
     return state;
