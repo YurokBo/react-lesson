@@ -19,7 +19,7 @@ const Message = (props) => {
 
 const Dialogs = (props) => {
 
-    let state = props.store.getState().dialogsPage;
+    let state = props.dialogsPage;
 
     let dialogs = state.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>);
     let messages = state.messages.map(m => <Message id={m.id} message={m.messages}/>);
@@ -28,12 +28,12 @@ const Dialogs = (props) => {
     let newMessageEl = React.createRef();
 
     const onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator())
+        props.sendMessage()
     };
 
     const onNewMessageChange = (e) => {
         let body = e.target.value;
-        props.store.dispatch(updateNewMessageBodyCreator(body))
+        props.updateNewMessageBody(body);
     };
 
     return (

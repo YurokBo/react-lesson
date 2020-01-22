@@ -1,5 +1,4 @@
 import React from 'react';
-import Post from "./Post/Post";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/ProfileReducer";
 import MyPosts from "./MyPosts";
 
@@ -17,11 +16,11 @@ const MyPostsContainer = (props) => {
     };
 
     return (
-        <div >
-           <MyPosts updateNewPostText={ onPostChange } addPost={ onAddPost }
+           <MyPosts updateNewPostText={ onPostChange } onAddPost={ onAddPost }
+                    //передаем посты через props из контейнерной компоненты в презентационную
                     posts={state.profilePage.posts}
-                    newpPostText={ state.profilePage.newPostText } />
-        </div>
+                    newPostText={ state.profilePage.newPostText } />
+
     )
 };
 

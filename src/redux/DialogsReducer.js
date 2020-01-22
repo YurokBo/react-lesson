@@ -21,7 +21,7 @@ let initialState = {
     ],
     newMessageBody: ''
 };
-
+//function which return action object
 const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
@@ -41,6 +41,7 @@ const dialogsReducer = (state = initialState, action) => {
 
 };
 
+//action creator - function which return action object. Action should has type
 //переносим action creators from state to here
 export const sendMessageCreator = () => ({type: SEND_MESSAGE,});
 
