@@ -3,27 +3,33 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../red
 import MyPosts from "./MyPosts";
 import StoreContext from "../../../StoreContext";
 
-const MyPostsContainer = (props) => {
+const MyPostsContainer = () => {
 
     return (
         //оборачиваем MyPost, чтобы перзентационная компонента имела доступ к контексту store
-        <StoreContext.Consumer>{
-            (store) => {
-                let state = props.store.getState();
+        //функция, которая принимает store и возвращает компоненту
+        <StoreContext.Consumer>
+            {store => {
+                let state = store.getState();
                 let onAddPost = () => {
-                    props.store.dispatch(addPostActionCreator())
+                    //убираем пропсы и обращаемся к стору напрямую
+                    store.dispatch(addPostActionCreator())
                 };
 
                 let onPostChange = (text) => {
                     let action = updateNewPostTextActionCreator(text);
-                    props.store.dispatch(action)
+                    //убираем пропсы и обращаемся к стору напрямую
+                    store.dispatch(action)
                 };
-                return <MyPosts updateNewPostText={onPostChange} onAddPost={onAddPost}
-                    //передаем посты через props из контейнерной компоненты в презентационную
-                                posts={state.profilePage.posts}
-                                newPostText={state.profilePage.newPostText}/>
+                return (
+                    <MyPosts updateNewPostText={onPostChange} onAddPost={onAddPost}
+                        //передаем посты через props из контейнерной компоненты в презентационную
+                             posts={state.profilePage.posts}
+                             newPostText={state.profilePage.newPostText}/>
+                )
             }
-        }</StoreContext.Consumer>
+            }
+        </StoreContext.Consumer>
 
     );
 };
