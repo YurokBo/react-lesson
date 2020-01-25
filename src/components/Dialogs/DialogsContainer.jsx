@@ -3,7 +3,7 @@ import s from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/DialogsReducer";
 import Dialogs from "./Dialogs";
-import StoreContext from "../../StoreContext";
+import {connect} from "react-redux";
 
 const DialogItem = (props) => {
     return (
@@ -11,42 +11,34 @@ const DialogItem = (props) => {
             <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
         </div>
     )
-}
+};
 
 const Message = (props) => {
     return (
         <div className={s.message}>{props.message}</div>
     )
-}
+};
 
 let newMessageEl = React.createRef();
 
-const DialogsContainer = () => {
-
-    return (
-        //the same in MyPostContainer
-        <StoreContext.Consumer>
-            {store => {
-
-                let state = store.getState().dialogsPage;
-
-                const onSendMessageClick = () => {
-                    //убираем пропсы и обращаемся к стору напрямую
-                    store.dispatch(sendMessageCreator())
-                };
-
-                const onNewMessageChange = (body) => {
-                    //убираем пропсы и обращаемся к стору напрямую
-                    store.dispatch(updateNewMessageBodyCreator(body))
-                };
-                return (
-                    <Dialogs updateNewMessageBody={onNewMessageChange} sendMessage={onSendMessageClick}
-                             dialogsPage={state}/>
-                )
-            }
-            }
-        </StoreContext.Consumer>
-    )
+//создаем ф-ции, которые возвращают объекты
+const mapStateToProps = (state) => {
+    return {
+        dialogsPage: state.dialogsPage
+    }
 };
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateNewMessageBody: (body) => {
+            dispatch(updateNewMessageBodyCreator(body))
+        },
+        sendMessage: () => {
+            dispatch(sendMessageCreator())
+        }
+    }
+};
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (Dialogs);
 
 export default DialogsContainer;
