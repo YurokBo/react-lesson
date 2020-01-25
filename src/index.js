@@ -5,7 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from "./redux/ReduxStore";
 import {BrowserRouter, Route} from "react-router-dom";
-import {Provider} from "./StoreContext";
+import {Provider} from "react-redux";
+
 
 let rerenderEntireTree = (state) => {
     ReactDOM.render(
