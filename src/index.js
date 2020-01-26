@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from "./redux/ReduxStore";
 import {BrowserRouter, Route} from "react-router-dom";
+//импорт provider из react-redux библиотеки
 import {Provider} from "react-redux";
 
 
