@@ -14,4 +14,6 @@ let reducers = combineReducers({
 //create store through func; отдаем закомбайненые reducers to store as args
 let store = createStore(reducers);
 
+window.state = store;
+
 export default store;
