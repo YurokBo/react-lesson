@@ -21,8 +21,8 @@ const Dialogs = (props) => {
 
     let state = props.dialogsPage;
 
-    let dialogs = state.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>);
-    let messages = state.messages.map(m => <Message id={m.id} message={m.messages}/>);
+    let dialogs = state.dialogs.map(d => <DialogItem key={d.id} d={d.id} name={d.name}/>);
+    let messages = state.messages.map(m => <Message key={m.id} message={m.messages}/>);
     let newMessageBody = state.newMessageBody;
 
     let newMessageEl = React.createRef();

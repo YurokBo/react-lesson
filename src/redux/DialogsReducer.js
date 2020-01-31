@@ -25,19 +25,28 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY: {
-            let stateCopy = {...state};
-            stateCopy.newMessageBody = action.body;
-            return stateCopy;
-        }
-        case SEND_MESSAGE: {
-            let stateCopy = {...state};
-            let body = stateCopy.newMessageBody;
-            stateCopy.newMessageBody = '';
-            stateCopy.messages = [...state.messages];
-            stateCopy.messages.push({id: 6, messages: body});
-            return stateCopy;
-        }
+
+        case UPDATE_NEW_MESSAGE_BODY:
+            //do copy for each case
+            //каждое изменение состояни перекидываем в копию объекта
+            //убрали переменную stateCopy и сразу возвращаем копию объекта
+            return {
+                ...state,
+                newMessageBody: action.body
+            };
+
+        case SEND_MESSAGE:
+            let body = state.newMessageBody;
+            //do copy state for each case
+            return {
+                //создаем копию
+                ...state,
+                //перезатираем сообщение на пустую строку
+                newMessageBody: '',
+                //вместо push добавляем новый элемент в конец массива messages
+                messages: [ ...state.messages, {id: 6, messages: body} ],
+            };
+
         default:
             return state;
     }

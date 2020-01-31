@@ -21,18 +21,21 @@ const profileReducer = (state = initialState, action) => {
                 messages: state.newPostText,
                 likesCount: 0
             };
-            //т.к. не имеем право менять объект, создаем копию объекта state и
-            //и туда пушим newPost и возвращаем копию
-            let stateCopy = {...state};
-            stateCopy.posts = [...state.posts];
-            stateCopy.posts.push(newPost);
-            stateCopy.newPostText = '';
-            return stateCopy;
+            //делаем тоже, что и в DialogsReducer
+            //do copy for each case
+            //каждое изменение состояни перекидываем в копию объекта
+            //убрали переменную stateCopy и сразу возвращаем копию объекта
+            return  {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: '',
+            };
         }
         case UPDATE_NEW_POST_TEXT: {
-            let stateCopy = {...state}
-            stateCopy.newPostText = action.newText;
-            return stateCopy;
+            return  {
+                ...state,
+                newPostText: action.newText
+            };
         }
         default:
             return state;
