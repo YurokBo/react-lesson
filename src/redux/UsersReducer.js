@@ -1,54 +1,66 @@
 // create reducer function for profile page
-const ADD_POST = 'ADD-POST',
-    UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-//инициализируем state для profilePage
-//забираем profilePage из старого объекта store
+const FOLLOW = 'FOLLOW',
+    UNFOLLOW = 'UNFOLLOW',
+    SET_USERS = 'SET-USERS';
+
+//инициализируем state для Users
 let initialState = {
-    posts: [
-        {id: 1, messages: 'Hi, how are you?', likesCount: 20},
-        {id: 2, messages: 'It is my first post!', likesCount: 30},
-        {id: 2, messages: 'It is my first post!', likesCount: 30},
-        {id: 2, messages: 'It is my first post!', likesCount: 30},
+    //created object of users
+    users: [
+        /*{id: 1, followed: false, fullName: 'Dmitry', status: 'I\'m here', location: {city: 'NY', country: 'USA'}},
+        {id: 2, followed: true, fullName: 'Ivan', status: 'Hello!', location: {city: 'Msc', country: 'RF'}},
+        {
+            id: 3,
+            followed: true,
+            fullName: 'Oleg',
+            status: 'Hello, brothers',
+            location: {city: 'Vladivostok', country: 'RF'}
+        },*/
     ],
-    newPostText: '',
 };
 
-const profileReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST: {
-            let newPost = {
-                id: 5,
-                messages: state.newPostText,
-                likesCount: 0
-            };
-            //делаем тоже, что и в DialogsReducer
-            //do copy for each case
-            //каждое изменение состояни перекидываем в копию объекта
-            //убрали переменную stateCopy и сразу возвращаем копию объекта
-            return  {
+        case FOLLOW:
+            return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: '',
+                //variants how to copy array
+                /*users: [...state.users],*/
+                users: state.users.map(u => {
+                    if (u.id === action.userId) {
+                        return {...u, followed: true}
+                    }
+                    return u;
+                })
             };
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return  {
+
+        case UNFOLLOW:
+            return {
                 ...state,
-                newPostText: action.newText
+                users: state.users.map(u => {
+                    if (u.id === action.userId) {
+                        return {...u, followed: false}
+                    }
+                    return u;
+                })
             };
-        }
+
+        case SET_USERS:
+            return {
+                ...state,
+                users: [...state.users, ...action.users],
+            };
+
         default:
             return state;
     }
 
 };
 
-//переносим action creators from state to here
-export const addPostActionCreator = () => ({type: ADD_POST,});
+//create followActionCreators function for follow/unfollow button
+export const followAC = (userId) => ({type: FOLLOW, userId});
+export const unfollowAC = (userId) => ({type: UNFOLLOW, userId});
+//take users from server and set them in state
+export const setUsersAC = (users) => ({type: SET_USERS, users});
 
-export const updateNewPostTextActionCreator = (text) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text,
-});
-
-export default profileReducer;
+export default usersReducer;

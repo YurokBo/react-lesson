@@ -4,7 +4,11 @@ import React from 'react';
 let Users = (props) => {
     return (
         <div>
-            Users will be here
+            {
+                props.users.map(u => <div key={u.id}>
+
+                </div>)
+            }
         </div>
     )
 };
