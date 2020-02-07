@@ -7,30 +7,7 @@ const FOLLOW = 'FOLLOW',
 let initialState = {
     //created object of users
     users: [
-       /* {
-            id: 1,
-            photoUrl: 'https://sun9-20.userapi.com/c850724/v850724327/1cc1b8/9K99zOgr-JA.jpg',
-            followed: false,
-            fullName: 'Olia',
-            status: 'I\'m here',
-            location: {city: 'NY', country: 'USA'}
-        },
-        {
-            id: 2,
-            photoUrl: 'https://sun9-20.userapi.com/c850724/v850724327/1cc1b8/9K99zOgr-JA.jpg',
-            followed: true,
-            fullName: 'Ivan',
-            status: 'Hello!',
-            location: {city: 'Msc', country: 'RF'}
-        },
-        {
-            id: 3,
-            photoUrl: 'https://sun9-20.userapi.com/c850724/v850724327/1cc1b8/9K99zOgr-JA.jpg',
-            followed: true,
-            fullName: 'Oleg',
-            status: 'Hello, brothers',
-            location: {city: 'Vladivostok', country: 'RF'}
-        },*/
+
     ],
 };
 
