@@ -9,6 +9,7 @@ const FOLLOW = 'FOLLOW',
 let initialState = {
     //created object of users
     users: [],
+    //по умолчанию устанавливаем количество пользователей на странице, общее количество и текущую страницу
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,

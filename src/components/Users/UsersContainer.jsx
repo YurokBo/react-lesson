@@ -10,6 +10,8 @@ const mapStateToProps = (state) => {
     //берем глобальный state из ReduxStore и вытаскиваем оттуда что нам нужен
     return {
         users: state.usersPage.users,
+        //прокидывем размер страницы, общее количество пользователей и текущую страницу через props
+        //в контейнерную компоненту
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,

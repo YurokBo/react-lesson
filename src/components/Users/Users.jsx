@@ -7,6 +7,8 @@ import userPhoto from '../../assets/imgages/user.png'
 class Users extends React.Component {
 
     componentDidMount() {
+        //get запрос на сервер за пользователями
+        //в параметрах после ? через пропсы указываем текущую страницу и размер страницы
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items);
@@ -18,6 +20,8 @@ class Users extends React.Component {
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
+        //делаем аякс запрос на сервер при клике переключения страницы
+        //чтобы получить еще пользователей для новой текущей страницы
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items);
@@ -26,11 +30,10 @@ class Users extends React.Component {
 
 
     render() {
-
+        //подсчитаваем количество страниц и округляем до целого в большую сторону, иначе не отрисует не полную страницу
         let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
-
+        //создаем пустой массив страниц и заполняем его через цикл количеством страниц методом push()
         let pages = [];
-
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i);
         }
@@ -39,9 +42,10 @@ class Users extends React.Component {
             <div>
 
                 <div>
-
+                    {/*методом map() пробегаем по массиву и возвращаем span и номер страницы*/}
                     {pages.map(p => {
                         return (
+                            //if currentPage === p true than page selected
                             <span className={this.props.currentPage === p ?
                                 styles.selectedPage :
                                 '' +
