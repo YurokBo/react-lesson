@@ -108,5 +108,14 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+//рефакторим код. вместо ф-ции mapDispatchToProps, возвращающей объект, вставляем сам объект
+//тем самым сокращаем количество кода
+export default connect(mapStateToProps, {
+    //action from UsersReducer
+    follow: followAC,
+    unfollow: unfollowAC,
+    setUsers: setUsersAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalUsersCount: setTotalUsersCountAC,
+    setToggleIsFetching: setToggleIsFetchingAC,
+    }) (UsersContainer);
