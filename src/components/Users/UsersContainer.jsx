@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setToggleIsFetchingAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setToggleIsFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow
 } from "../../redux/UsersReducer";
 import * as axios from "axios";
 import Users from "./Users";
@@ -76,46 +76,15 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    //return callback functions
-    return {
-        //action from UsersReducer
-        follow: (userId) => {
-            //dispatch action
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId) => {
-            //dispatch action
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users) => {
-            //dispatch action
-            dispatch(setUsersAC(users))
-        },
-
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-
-        setToggleIsFetching: (isFetching) => {
-            dispatch( setToggleIsFetchingAC(isFetching))
-        }
-
-    }
-};
 
 //рефакторим код. вместо ф-ции mapDispatchToProps, возвращающей объект, вставляем сам объект
 //тем самым сокращаем количество кода
 export default connect(mapStateToProps, {
     //action from UsersReducer
-    follow: followAC,
-    unfollow: unfollowAC,
-    setUsers: setUsersAC,
-    setCurrentPage: setCurrentPageAC,
-    setTotalUsersCount: setTotalUsersCountAC,
-    setToggleIsFetching: setToggleIsFetchingAC,
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    setToggleIsFetching,
     }) (UsersContainer);
