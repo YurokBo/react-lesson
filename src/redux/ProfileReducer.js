@@ -1,6 +1,7 @@
 // create reducer function for profile page
 const ADD_POST = 'ADD-POST',
-    UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+    UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT',
+    SET_USER_PROFILE = 'SET_USER_PROFILE';
 //инициализируем state для profilePage
 //забираем profilePage из старого объекта store
 let initialState = {
@@ -11,6 +12,7 @@ let initialState = {
         {id: 2, messages: 'It is my first post!', likesCount: 30},
     ],
     newPostText: '',
+    profile: null,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -37,6 +39,9 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: action.newText
             };
         }
+        case SET_USER_PROFILE: {
+            return { ...state,  profile: action.profile }
+        }
         default:
             return state;
     }
@@ -45,6 +50,8 @@ const profileReducer = (state = initialState, action) => {
 
 //переносим action creators from state to here
 export const addPostActionCreator = () => ({type: ADD_POST,});
+
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
 export const updateNewPostTextActionCreator = (text) => ({
     type: UPDATE_NEW_POST_TEXT,
