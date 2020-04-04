@@ -3,6 +3,7 @@ import profileReducer from "./ProfileReducer";
 import dialogsReducer from "./DialogsReducer";
 import sidebarReducer from "./SidebarReducer";
 import usersReducer from "./UsersReducer";
+import authReducer from "./AuthReducer";
 
 //function which reducers stick together
 let reducers = combineReducers({
@@ -11,6 +12,7 @@ let reducers = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
+    auth: authReducer,
 });
 
 //create store through func; отдаем закомбайненые reducers to store as args
