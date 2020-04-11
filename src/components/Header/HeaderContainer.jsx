@@ -11,7 +11,6 @@ class HeaderContainer extends React.Component {
             withCredentials: true
         })
             .then(response => {
-            debugger
                 //проверка, если залогинены - должны задиспатчить авторизационные данные
                 if (response.data.resultCode === 0) {
                     let {id, email, login} = response.data.data;

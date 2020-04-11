@@ -11,6 +11,7 @@ import {
 import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../../components/Common/Preloader/Preloader";
+import {getUsers} from "../../api/api";
 
 //вся контейнерная логика в одной контейнерной компоненте
 class UsersContainer extends React.Component {
@@ -18,16 +19,13 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         //запрос идет - показывается прелоадер
         this.props.setToggleIsFetching(true);
-        //get запрос на сервер за пользователями
-        //в параметрах после ? через пропсы указываем текущую страницу и размер страницы
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                //запрос пришел - прелоадер скрылся
-                this.props.setToggleIsFetching(false);
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
-            });
 
+        getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+            //запрос пришел - прелоадер скрылся
+            this.props.setToggleIsFetching(false);
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount);
+        });
 
     }
 
@@ -36,10 +34,9 @@ class UsersContainer extends React.Component {
         this.props.setToggleIsFetching(true);
         //делаем аякс запрос на сервер при клике переключения страницы
         //чтобы получить еще пользователей для новой текущей страницы
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => {
+        getUsers(pageNumber, this.props.pageSize).then(data => {
                 this.props.setToggleIsFetching(false);
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
             });
     };
 
