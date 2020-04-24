@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {Redirect} from "react-router-dom";
 
 
 const Profile = (props) => {
@@ -13,6 +14,6 @@ const Profile = (props) => {
 
         </div>
     )
-}
+};
 
 export default Profile;

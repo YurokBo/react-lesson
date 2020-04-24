@@ -24,7 +24,8 @@ let newMessageEl = React.createRef();
 //создаем ф-ции, которые возвращают объекты
 const mapStateToProps = (state) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 };
 
