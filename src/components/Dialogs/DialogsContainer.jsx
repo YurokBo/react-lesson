@@ -1,11 +1,14 @@
 import React from 'react';
 import s from './Dialogs.module.css';
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/DialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import withAuthRedirect from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 const DialogItem = (props) => {
+
     return (
         <div className={s.dialog + ' ' + s.active}>
             <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
@@ -25,7 +28,6 @@ let newMessageEl = React.createRef();
 const mapStateToProps = (state) => {
     return {
         dialogsPage: state.dialogsPage,
-        isAuth: state.auth.isAuth
     }
 };
 
@@ -40,6 +42,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (Dialogs);
-
-export default DialogsContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs);

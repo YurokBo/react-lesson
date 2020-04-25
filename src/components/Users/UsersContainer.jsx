@@ -9,6 +9,8 @@ import {
 } from "../../redux/UsersReducer";
 import Users from "./Users";
 import Preloader from "../../components/Common/Preloader/Preloader";
+import withAuthRedirect from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 //вся контейнерная логика в одной контейнерной компоненте
 class UsersContainer extends React.Component {
@@ -60,14 +62,14 @@ const mapStateToProps = (state) => {
     }
 };
 
-
-//рефакторим код. вместо ф-ции mapDispatchToProps, возвращающей объект, вставляем сам объект
-//тем самым сокращаем количество кода
-export default connect(mapStateToProps, {
-    //action from UsersReducer
-    follow,
-    unfollow,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers,
-    }) (UsersContainer);
+export default compose(
+    connect(mapStateToProps, {
+        //action from UsersReducer
+        follow,
+        unfollow,
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsers,
+    }),
+    withAuthRedirect
+)(UsersContainer);
