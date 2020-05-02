@@ -3,7 +3,8 @@ import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST',
     UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT',
-    SET_USER_PROFILE = 'SET_USER_PROFILE';
+    SET_USER_PROFILE = 'SET_USER_PROFILE',
+    SET_STATUS = 'SET_STATUS';
 //инициализируем state для profilePage
 //забираем profilePage из старого объекта store
 let initialState = {
@@ -15,6 +16,7 @@ let initialState = {
     ],
     newPostText: '',
     profile: null,
+    status: '',
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -44,6 +46,10 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER_PROFILE: {
             return { ...state,  profile: action.profile }
         }
+        case SET_STATUS: {
+            return { ...state,  status: action.status }
+        }
+
         default:
             return state;
     }
@@ -60,6 +66,9 @@ export const updateNewPostTextActionCreator = (text) => ({
     newText: text,
 });
 
+export const setStatus = (status) => ({type: SET_STATUS, status});
+
+//thunk functions
 export const getUserProfile = (userId) => {
     return (dispatch) => {
         usersAPI.getProfile(userId)
@@ -69,5 +78,28 @@ export const getUserProfile = (userId) => {
             });
     }
 };
+
+export const getStatus = (userId) => {
+    return (dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(response => {
+                //запрос пришел - прелоадер скрылся
+                dispatch(setStatus(response.data));
+            });
+    }
+};
+
+export const updateStatus = (status) => {
+    return (dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setStatus(status));
+                }
+            });
+    }
+};
+
+
 
 export default profileReducer;

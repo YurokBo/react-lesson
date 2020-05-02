@@ -7,37 +7,53 @@ const instanse = axios.create({
         "API-KEY": "7ea7ad70-1725-4d83-8d74-61bde9b8f3b0"
     },
 });
+
 export const usersAPI = {
-    getUsers (currentPage = 1, pageSize = 10) {
+    getUsers(currentPage = 1, pageSize = 10) {
         return instanse.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
 
-    follow (userID) {
+    follow(userID) {
         return instanse.post(`follow/${userID}`)
     },
 
-    unfollow (userID) {
-       return instanse.delete(`follow/${userID}`)
+    unfollow(userID) {
+        return instanse.delete(`follow/${userID}`)
     },
 
-    getProfile (userId) {
+    getProfile(userId) {
+        console.warn('Obsolete method. Please, use ProfileAPI');
         return (
-            instanse.get(`profile/` + userId)
+            profileAPI.getProfile(userId)
         )
     }
 };
 
 export const authAPI = {
-    getAuth () {
+    getAuth() {
         return instanse.get(`auth/me`).then(response => response.data)
     }
 };
-/*
+
 export const profileAPI = {
-  getProfile (userId) {
-      return (
-          instanse.get(`profile/` + userId)
-      )
-  }
-};*/
+    getProfile(userId) {
+        return (
+            instanse.get(`profile/` + userId)
+        )
+    },
+
+    getStatus(userId) {
+        return (
+            instanse.get(`profile/status/` + userId)
+        )
+    },
+
+    updateStatus(status) {
+        return (
+            instanse.put(`profile/status`, {
+                status: status
+            })
+        )
+    }
+};
 
