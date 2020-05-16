@@ -4,7 +4,8 @@ import dialogsReducer from "./DialogsReducer";
 import sidebarReducer from "./SidebarReducer";
 import usersReducer from "./UsersReducer";
 import authReducer from "./AuthReducer";
-import thunkMiddleware from "redux-thunk"
+import thunkMiddleware from "redux-thunk";
+import { reducer as formReducer } from 'redux-form'
 
 //function which reducers stick together
 let reducers = combineReducers({
@@ -14,6 +15,7 @@ let reducers = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    form: formReducer,
 });
 
 //create store through func; отдаем закомбайненые reducers to store as args
