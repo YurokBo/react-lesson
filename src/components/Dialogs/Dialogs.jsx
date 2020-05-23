@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import {NavLink, Redirect} from "react-router-dom";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/DialogsReducer";
+import {Field, reduxForm} from "redux-form";
 
 const DialogItem = (props) => {
     return (
@@ -23,21 +24,14 @@ const Dialogs = (props) => {
 
     let dialogs = state.dialogs.map(d => <DialogItem key={d.id} d={d.id} name={d.name}/>);
     let messages = state.messages.map(m => <Message key={m.id} message={m.messages}/>);
-    let newMessageBody = state.newMessageBody;
 
-    let newMessageEl = React.createRef();
-
-    const onSendMessageClick = () => {
-        props.sendMessage()
-    };
-
-    const onNewMessageChange = (e) => {
-        let body = e.target.value;
-        props.updateNewMessageBody(body);
+    const addNewMessage = (values) => {
+        props.sendMessage(values.newMessageBody);
+        values.newMessageBody = '';
     };
 
     if (!props.isAuth) {
-        return <Redirect to={"/login"} />
+        return <Redirect to={"/login"}/>
     }
 
     return (
@@ -48,14 +42,26 @@ const Dialogs = (props) => {
 
             <div className={s.messages}>
                 <div>{messages}</div>
-                <div>
-                    <div><textarea value={newMessageBody} onChange={onNewMessageChange} placeholder='Enter message'></textarea></div>
-                    <div><button onClick={onSendMessageClick}>Send</button></div>
-                </div>
+                <AddMassageFormRedux onSubmit={addNewMessage} />
             </div>
 
         </div>
     )
-}
+};
+
+const AddMassageForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field component='textarea' name='newMessageBody' placeholder='Enter your message'/>
+            </div>
+            <div>
+                <button>Send</button>
+            </div>
+        </form>
+    )
+};
+
+const AddMassageFormRedux = reduxForm({form: "dialogAddMassageForm"})(AddMassageForm);
 
 export default Dialogs;

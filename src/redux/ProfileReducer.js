@@ -2,7 +2,6 @@
 import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST',
-    UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT',
     SET_USER_PROFILE = 'SET_USER_PROFILE',
     SET_STATUS = 'SET_STATUS';
 //инициализируем state для profilePage
@@ -14,7 +13,6 @@ let initialState = {
         {id: 2, messages: 'It is my first post!', likesCount: 30},
         {id: 2, messages: 'It is my first post!', likesCount: 30},
     ],
-    newPostText: '',
     profile: null,
     status: '',
 };
@@ -24,7 +22,7 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             let newPost = {
                 id: 5,
-                messages: state.newPostText,
+                messages: action.newPostText,
                 likesCount: 0
             };
             //делаем тоже, что и в DialogsReducer
@@ -37,12 +35,7 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: '',
             };
         }
-        case UPDATE_NEW_POST_TEXT: {
-            return  {
-                ...state,
-                newPostText: action.newText
-            };
-        }
+
         case SET_USER_PROFILE: {
             return { ...state,  profile: action.profile }
         }
@@ -57,14 +50,9 @@ const profileReducer = (state = initialState, action) => {
 };
 
 //переносим action creators from state to here
-export const addPostActionCreator = () => ({type: ADD_POST,});
+export const addPostActionCreator = (addPost) => ({type: ADD_POST, addPost});
 
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
-
-export const updateNewPostTextActionCreator = (text) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text,
-});
 
 export const setStatus = (status) => ({type: SET_STATUS, status});
 

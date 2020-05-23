@@ -57,3 +57,9 @@ export const profileAPI = {
     }
 };
 
+export const loginAPI = {
+    postLogin() {
+        return instanse.post('auth/login')
+    }
+};
+
