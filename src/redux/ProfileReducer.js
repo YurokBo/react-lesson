@@ -50,7 +50,7 @@ const profileReducer = (state = initialState, action) => {
 };
 
 //переносим action creators from state to here
-export const addPostActionCreator = (addPost) => ({type: ADD_POST, addPost});
+export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText});
 
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
